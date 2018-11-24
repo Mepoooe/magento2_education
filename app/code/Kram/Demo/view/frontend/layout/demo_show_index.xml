@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <!--<move element="demo_block_main" destination="content" />-->
+    <!--<referenceBlock name="demo_block_main" remove="true" />-->
+    <referenceContainer name="content">
+        <block template="content.phtml" class="Kram\Demo\Block\Show" name="kram_demo_block_show">
+
+            <block template="title.phtml" class="Mikhail\StarWars\Block\Title" name="mikhail_starwars_block_title"/>
+            <arguments>
+                <argument name="wrapper" xsi:type="string">div</argument>
+                <!--<argument name="columns" xsi:type="number">2</argument>-->
+            </arguments>
+            <action method="setTitleByHtml">
+                <argument name="title" xsi:type="string">Hello from setTitleByHtml</argument>
+            </action>
+        </block>
+    </referenceContainer>
+    <!--doesn't work =< -->
+    <move element="mikhail_starwars_block_title" destination="content" after="-"/>
+</page>
