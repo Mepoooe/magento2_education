@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <referenceContainer name="content">
+        <block template="title.phtml" class="Mikhail\StarWars\Block\Title" name="mikhail_starwars_block_title"/>
+        <block template="content.phtml" class="Mikhail\StarWars\Block\Main" name="mikhail_starwars_block_main"/>
+    </referenceContainer>
+    <move element="mikhail_starwars_block_main" destination="footer" after="store_switcher" />
+</page>

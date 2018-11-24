@@ -1,0 +1,20 @@
+<style>
+  .star-wars-films {
+    display: inline-block;
+  }
+</style>
+
+
+
+<div class="star-wars-films">
+  <ol>
+      <?php foreach ($this->getFilmsList() as $film): ?>
+        <li>
+          Title: <a target="_blank" href="http://<?= $film['link'] ?>"><b>"<?= $film['title'] ?>"</b></a>. Release:
+          <i><?= $film['releaseDate'] ?></i>
+        </li>
+      <?php endforeach; ?>
+  </ol>
+</div>
+<?php
+//$block->getUrl('sss');
