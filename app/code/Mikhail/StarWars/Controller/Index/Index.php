@@ -5,26 +5,28 @@ class Index extends \Magento\Framework\App\Action\Action
 {
     protected $resultPageFactory;
     protected $helper;
+    protected $film;
 
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
-        \Kram\Handler\Helper\Data $helper
+        \Mikhail\StarWars\Model\FilmFactory $film
     )
     {
+        $this->film = $film;
         $this->resultPageFactory = $resultPageFactory;
-        $this->helper = $helper;
         parent::__construct($context);
     }
 
     public function execute()
     {
+        $post = $this->film->create();
+        $collection = $this->film->getCollection();
+        echo '<pre>';
+        var_dump($collection);
+        echo '</pre>';
+        die;
         $resultPage = $this->resultPageFactory->create();
-//        $this->_redirect('*/*/index');// 1 * текущий модуль 2 * текущий контроллер
-//        $this->_redirect('demo/index/index')
-//        $this->getRequest()->getParams(); получает гет параметры
-//        $this->_forward('index', 'index', '');// передает управление другому контроллеру
-//         getRequest есть и в блоке
         return $resultPage;
 
     }
