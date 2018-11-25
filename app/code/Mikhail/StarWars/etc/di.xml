@@ -5,4 +5,19 @@
         <plugin name="mikhail_starwars_helper_data"
                 type="Mikhail\StarWars\Plugin\Helper\DataPlugin"/>
     </type>
+    <virtualType name="StarWarsStarship" type="Mikhail\StarWars\Helper\Data">
+        <arguments>
+            <argument name="entity" xsi:type="string">starships</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="StarWarsFilm" type="Mikhail\StarWars\Helper\Data">
+        <arguments>
+            <argument name="entity" xsi:type="string">films</argument>
+        </arguments>
+    </virtualType>
+    <type name="Mikhail\StarWars\Block\Main">
+        <arguments>
+            <argument name="dataHelper" xsi:type="object">StarWarsFilm</argument>
+        </arguments>
+    </type>
 </config>
