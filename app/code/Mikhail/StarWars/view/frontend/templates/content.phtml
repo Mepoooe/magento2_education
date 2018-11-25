@@ -4,14 +4,12 @@
   }
 </style>
 
-
-
 <div class="star-wars-films">
   <ol>
-      <?php foreach ($this->getFilmsList() as $film): ?>
+      <?php foreach ($this->getStarWarsFilms() as $film): ?>
         <li>
-          Title: <a target="_blank" href="http://<?= $film['link'] ?>"><b>"<?= $film['title'] ?>"</b></a>. Release:
-          <i><?= $film['releaseDate'] ?></i>
+          Title: <a target="_blank" href="http://google.com/search?q=<?= $film->title ?>"><b>"<?= $film->title ?>"</b></a>. Release:
+          <i><?= $film->release_date ?></i>
         </li>
       <?php endforeach; ?>
   </ol>

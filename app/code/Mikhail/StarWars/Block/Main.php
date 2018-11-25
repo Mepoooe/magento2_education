@@ -1,52 +1,36 @@
 <?php
+
 namespace Mikhail\StarWars\Block;
+
 use Magento\Framework\View\Element\Template;
 
 class Main extends \Magento\Framework\View\Element\Template
 {
-    function _prepareLayout(){
-        $starWarsFilmList = $this->getStarWarsFilms();
-        $this->setFilmsList($starWarsFilmList);
+    protected $helper;
+    protected $objectManager;
+
+
+    public function __construct(
+        Template\Context $context,
+        array $data = [],
+        \Mikhail\StarWars\Helper\Data $dataHelper,
+        \Magento\Framework\ObjectManagerInterface $manager
+//        StarWarsData $dataHelper // virtual type which doesn't work
+    )
+    {
+
+        $this->objectManager = $manager;
+        $this->helper = $dataHelper;
+        parent::__construct($context, $data);
     }
 
-    private function getStarWarsFilms()
+    function _prepareLayout(){}
+
+    public function getStarWarsFilms()
     {
-        $request = new \Zend\Http\Request();
-        $httpHeaders = new \Zend\Http\Headers();
-        $httpHeaders->addHeaders([
-            'Accept' => 'application/json',
-            'Content-Type' => 'application/json'
-        ]);
-        $request->setHeaders($httpHeaders);
-        $request->setUri('http://swapi.co/api/films/');
-        $request->setMethod(\Zend\Http\Request::METHOD_GET);
-
-        $client = new \Zend\Http\Client();
-        $options = [
-            'adapter'   => 'Zend\Http\Client\Adapter\Curl',
-            'curloptions' => [CURLOPT_FOLLOWLOCATION => true],
-            'timeout' => 30
-        ];
-        $client->setOptions($options);
-
-        $response = $client->send($request);
-        $responseContent = json_decode($response->getBody());
-        return $this->prepareStarWarsFilmsList($responseContent->results);
-    }
-
-    private function prepareStarWarsFilmsList($starWarsFilmList)
-    {
-        $list = [];
-        foreach ($starWarsFilmList as $starWarsFilm) {
-            $list[] = [
-              'title' => $starWarsFilm->title,
-              'episodeId' => $starWarsFilm->episode_id,
-              'description' => $starWarsFilm->opening_crawl,
-              'releaseDate' => $starWarsFilm->release_date,
-              'link' => 'google.com/search?q=' . $starWarsFilm->title,
-            ];
+        if ($episode = $this->getRequest()->getParam('episode')) {
+            return $this->helper->getEntityById($episode); // return filtering array
         }
-
-        return $list;
+        return $this->helper->getCollection();
     }
 }
