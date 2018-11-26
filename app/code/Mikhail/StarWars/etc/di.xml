@@ -22,6 +22,9 @@
         <arguments>
             <argument name="commands" xsi:type="array">
                 <item name="mikhail_starwars_command_dbase" xsi:type="object">Mikhail\StarWars\Command\dbase</item>
+                <item name="mikhail_starwars_command_dbase_film_list" xsi:type="object">Mikhail\StarWars\Command\DbaseFilmList</item>
+                <item name="mikhail_starwars_command_dbase_film_create" xsi:type="object">Mikhail\StarWars\Command\DbaseFilmCreate</item>
+                <item name="mikhail_starwars_command_dbase_film_delete" xsi:type="object">Mikhail\StarWars\Command\DbaseFilmDelete</item>
             </argument>
         </arguments>
     </type>
