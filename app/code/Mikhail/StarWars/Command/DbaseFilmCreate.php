@@ -8,15 +8,18 @@ use Symfony\Component\Console\Output\OutputInterface;
 class DbaseFilmCreate extends Command
 {
     protected $objectManager;
+    protected $eventManager;
 
     /**
      * @param \Magento\Framework\ObjectManagerInterface $manager
      */
     public function __construct(
-        \Magento\Framework\ObjectManagerInterface $manager
+        \Magento\Framework\ObjectManagerInterface $manager,
+        \Magento\Framework\Event\ManagerInterface $eventManager
     )
     {
         $this->objectManager = $manager;
+        $this->eventManager = $eventManager;
         parent::__construct();
     }
 
@@ -38,6 +41,13 @@ class DbaseFilmCreate extends Command
             $film->setDirector($starWarsFilm->director);
             $film->save();
         }
+
+        $product = $this->objectManager->create('Magento\Framework\DataObject', ['text' => 'initial']);
+
+        /** only object can be passed from event to observer */
+        $this->eventManager->dispatch('dbase_command_dispatch', ['product' => $product]);
+
+        $output->writeln("After event: ". $product->getText());
     }
 
     private function getStarWarsFilms()
